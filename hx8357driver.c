@@ -6,6 +6,7 @@
 
 #include "hx8357driver.h"
 
+/******** Adjust these for your board/mcu! *********/
 // Controls will be on different port
 #define LCD_RST_DIR     GpioCtrlRegs.GPCDIR.bit.GPIO95
 #define LCD_RST_SET     GpioDataRegs.GPCSET.bit.GPIO95
@@ -30,6 +31,7 @@
 // Data is GPIO[7:0]
 #define LCD_DATA_IN     GpioCtrlRegs.GPADIR.all &= ~(0xFF)
 #define LCD_DATA_OUT    GpioCtrlRegs.GPADIR.all |= (0xFF)
+/***************************************************/
 
 
 // HX8357-D Commands
@@ -65,7 +67,6 @@ void initbigLCD(void)
     EDIS;
 
     DELAY_US(100e3);
-    //~~~~~GPIO setting~~~~~//
 
 
     //****init sequence****//
@@ -100,8 +101,6 @@ void initbigLCD(void)
 
     // display on
     HX8357D_writecommand8(HX8357D_CMD_DISPON);
-
-    //~~~~init sequence~~~~//
 
 }
 
